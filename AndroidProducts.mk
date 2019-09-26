@@ -14,4 +14,9 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_tomato.mk
+    $(LOCAL_DIR)/aosp_tomato.mk
+
+COMMON_LUNCH_CHOICES := \
+    aosp_tomato-userdebug \
+    aosp_tomato-eng \
+    aosp_tomato-user

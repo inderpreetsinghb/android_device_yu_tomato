@@ -52,7 +52,7 @@ TARGET_SCREEN_WIDTH := 720
 PRODUCT_PACKAGES += \
     camera.msm8916 \
     libmm-qcamera \
-    Snap
+    Camera2
 
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl 
@@ -152,6 +152,22 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_cfg.dat \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
+
+# Misc
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    dalvik.vm.debug.alloc=0 \
+    ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html \
+    ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html \
+    ro.error.receiver.system.apps=com.google.android.gms \
+    ro.setupwizard.enterprise_mode=1 \
+    ro.com.android.dataroaming=false \
+    ro.atrace.core.services=com.google.android.gms,com.google.android.gms.ui,com.google.android.gms.persistent \
+    ro.com.android.dateformat=MM-dd-yyyy \
+    persist.sys.disable_rescue=true \
+    ro.setupwizard.rotation_locked=true \
+    ro.com.google.clientidbase=android-micromax \
+    ro.adb.secure=0 \
+    net.tethering.noprovisioning=true
 
 # Call the proprietary setup
 $(call inherit-product, vendor/yu/tomato/tomato-vendor.mk)

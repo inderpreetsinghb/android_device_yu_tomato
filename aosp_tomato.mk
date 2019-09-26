@@ -1,5 +1,5 @@
 # Copyright (C) 2014 The CyanogenMod Project
-# Copyright (C) 2018 The LineageOS Project
+# Copyright (C) 2018 The aospOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,18 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(call inherit-product, device/yu/tomato/full_tomato.mk)
 
-# Inherit some common LineageOS stuff.
-$(call inherit-product, vendor/lineage/config/common_mini_phone.mk)
+# Inherit from those products. Most specific first.
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+
+
+# Inherit some common aospOS stuff.
+$(call inherit-product, vendor/teamone/mod/config.mk)
 
 # Must define platform variant before including any common things
 TARGET_BOARD_PLATFORM_VARIANT := msm8939
 
-#User
-export KBUILD_BUILD_USER=rajesh
-export KBUILD_BUILD_HOST=xda
-PRODUCT_NAME := lineage_tomato
+PRODUCT_BRAND := YU
+PRODUCT_MODEL := AO5510
+PRODUCT_MANUFACTURER := YU
+PRODUCT_NAME := aosp_tomato
 BOARD_VENDOR := yu
 PRODUCT_DEVICE := tomato
 

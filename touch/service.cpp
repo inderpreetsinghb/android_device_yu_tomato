@@ -20,21 +20,21 @@
 #include <binder/ProcessState.h>
 #include <hidl/HidlTransportSupport.h>
 
-#include "KeyDisabler.h"
+#include "TouchscreenGesture.h"
 
 using android::sp;
 using android::OK;
 
-using ::vendor::lineage::touch::V1_0::IKeyDisabler;
-using ::vendor::lineage::touch::V1_0::implementation::KeyDisabler;
+using ::vendor::lineage::touch::V1_0::ITouchscreenGesture;
+using ::vendor::lineage::touch::V1_0::implementation::TouchscreenGesture;
 
 int main() {
-    sp<IKeyDisabler> keyDisabler = new KeyDisabler();
+    sp<ITouchscreenGesture> touchscreenGesture = new TouchscreenGesture();
 
     android::hardware::configureRpcThreadpool(1, true /*callerWillJoin*/);
 
-    if (keyDisabler->registerAsService() != OK) {
-        LOG(ERROR) << "Cannot register keydisabler HAL service.";
+    if (touchscreenGesture->registerAsService() != OK) {
+        LOG(ERROR) << "Cannot register touchscreen gesture HAL service.";
         return 1;
     }
     LOG(INFO) << "Touch HAL service is ready.";

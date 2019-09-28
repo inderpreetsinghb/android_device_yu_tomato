@@ -1,6 +1,5 @@
 /*
-   Copyright (c) 2015, The CyanogenMod Project
-
+   Copyright (c) 2016, The CyanogenMod Project
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
    met:
@@ -13,7 +12,6 @@
     * Neither the name of The Linux Foundation nor the names of its
       contributors may be used to endorse or promote products derived
       from this software without specific prior written permission.
-
    THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
    WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
@@ -34,42 +32,30 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#include <android-base/properties.h>
-
+#include <android-base/file.h>
 #include <android-base/logging.h>
+#include <android-base/properties.h>
+#include <android-base/strings.h>
+
 #include "property_service.h"
 #include "vendor_init.h"
 
 #include "init_tomato.h"
 
 using android::base::GetProperty;
+using android::base::ReadFileToString;
+using android::base::Trim;
 using android::init::property_set;
-using android::init::import_kernel_cmdline;
 
 __attribute__ ((weak))
 void init_target_properties()
 {
-    char density[5];
-    import_kernel_cmdline(0, import_cmdline);
-    snprintf(density, sizeof(density), "%d", display_density);
-    property_set("ro.sf.lcd_density", density);
-    if (display_density == 480) {
-        property_set("ro.product.model", "YU5510");
-        property_set("dalvik.vm.heapstartsize", "16m");
-        property_set("dalvik.vm.heapgrowthlimit", "192m");
-        property_set("dalvik.vm.heapsize", "512m");
-        property_set("dalvik.vm.heaptargetutilization", "0.75");
-        property_set("dalvik.vm.heapminfree", "2m");
-        property_set("dalvik.vm.heapmaxfree", "8m");
-    } else {
-        property_set("ro.product.model", "AO5510");
         property_set("dalvik.vm.heapstartsize", "8m");
         property_set("dalvik.vm.heapgrowthlimit", "192m");
         property_set("dalvik.vm.heapsize", "512m");
         property_set("dalvik.vm.heaptargetutilization", "0.75");
         property_set("dalvik.vm.heapminfree", "512k");
         property_set("dalvik.vm.heapmaxfree", "8m");
-    }
 }
 
 static void init_alarm_boot_properties()
